@@ -1,0 +1,561 @@
+/* src/renderer/styles/dashboard.css */
+.dashboard-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 24px;
+  }
+  
+  /* Stats Cards */
+  .stat-cards {
+    display: flex;
+    gap: 16px;
+  }
+  
+  .stat-card {
+    background-color: #222;
+    border-radius: 12px;
+    padding: 16px;
+    min-width: 120px;
+    border: 1px solid #333;
+  }
+  
+  .stat-value {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  
+  .stat-label {
+    color: #aaa;
+    font-size: 14px;
+  }
+  
+  /* Platform Status */
+  .platform-status {
+    display: flex;
+    gap: 16px;
+  }
+  
+  .platform-status-item {
+    display: flex;
+    align-items: center;
+    background-color: #222;
+    border-radius: 12px;
+    padding: 12px;
+    cursor: pointer;
+    border: 1px solid #333;
+    transition: all 0.2s;
+  }
+  
+  .platform-status-item:hover {
+    background-color: #2a2a2a;
+    border-color: #444;
+  }
+  
+  .platform-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    margin-right: 12px;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+  
+  .platform-icon.large {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+  }
+  
+  .status-info {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .status-name {
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+  
+  .status-indicator {
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .status-indicator.connected {
+    color: #4CAF50;
+  }
+  
+  .status-indicator.connected:before {
+    content: "";
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #4CAF50;
+    margin-right: 4px;
+  }
+  
+  .status-indicator.disconnected {
+    color: #F44336;
+  }
+  
+  .status-indicator.disconnected:before {
+    content: "";
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #F44336;
+    margin-right: 4px;
+  }
+  
+  /* Platform Tabs */
+  .platform-tabs {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .tab-buttons {
+    display: flex;
+    border-bottom: 1px solid #333;
+    margin-bottom: 16px;
+  }
+  
+  .tab-button {
+    padding: 10px 20px;
+    background: none;
+    border: none;
+    color: #aaa;
+    cursor: pointer;
+    position: relative;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  
+  .tab-button:hover {
+    color: #fff;
+  }
+  
+  .tab-button.active {
+    color: var(--accent-color);
+  }
+  
+  .tab-button.active:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--accent-color);
+  }
+  
+  .tab-content {
+    flex-grow: 1;
+    overflow: auto;
+  }
+  
+  .tab-pane {
+    display: none;
+    height: 100%;
+  }
+  
+  .tab-pane.active {
+    display: block;
+  }
+  
+  /* Overview Tab */
+  .overview-tab {
+    padding-bottom: 32px;
+  }
+  
+  .section-header {
+    margin: 24px 0 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .section-header h3 {
+    margin: 0;
+    font-weight: 500;
+  }
+  
+  .recent-uploads {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 16px;
+  }
+  
+  .video-card {
+    background-color: #222;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.2s;
+    cursor: pointer;
+  }
+  
+  .video-card:hover {
+    transform: translateY(-4px);
+  }
+  
+  .video-thumbnail {
+    height: 140px;
+    position: relative;
+  }
+  
+  .platform-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+  }
+  
+  .video-info {
+    padding: 12px;
+  }
+  
+  .video-title {
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+  
+  .video-meta {
+    display: flex;
+    gap: 16px;
+    font-size: 12px;
+    color: #aaa;
+  }
+  
+  /* Scheduled Uploads */
+  .scheduled-uploads {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .schedule-card {
+    display: flex;
+    align-items: center;
+    background-color: #222;
+    border-radius: 12px;
+    padding: 12px;
+    border: 1px solid #333;
+  }
+  
+  .schedule-date {
+    min-width: 60px;
+    text-align: center;
+    margin-right: 16px;
+  }
+  
+  .day {
+    font-size: 20px;
+    font-weight: 600;
+  }
+  
+  .month {
+    font-size: 14px;
+    color: #aaa;
+  }
+  
+  .schedule-info {
+    flex-grow: 1;
+  }
+  
+  .schedule-title {
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+  
+  .schedule-platforms {
+    display: flex;
+    gap: 8px;
+  }
+  
+  .schedule-platforms .platform-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 0;
+  }
+  
+  .schedule-time {
+    margin: 0 24px;
+    font-weight: 500;
+  }
+  
+  .schedule-status {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  
+  .schedule-status.scheduled {
+    background-color: rgba(227, 158, 25, 0.2);
+    color: var(--accent-color);
+  }
+  
+  .schedule-status.processing {
+    background-color: rgba(25, 118, 227, 0.2);
+    color: #1976e3;
+  }
+  
+  .schedule-status.published {
+    background-color: rgba(76, 175, 80, 0.2);
+    color: #4CAF50;
+  }
+  
+  /* Platform specific tabs */
+  
+  /* YouTube Tab */
+  .platform-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+  
+  .platform-header h2 {
+    margin: 0;
+    margin-left: 16px;
+    font-weight: 500;
+  }
+  
+  .platform-stats {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  
+  .video-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .video-item {
+    display: flex;
+    background-color: #222;
+    border-radius: 12px;
+    padding: 12px;
+    border: 1px solid #333;
+  }
+  
+  .video-item .video-thumbnail {
+    width: 120px;
+    height: 68px;
+    border-radius: 6px;
+    margin-right: 16px;
+    flex-shrink: 0;
+  }
+  
+  .video-details {
+    flex-grow: 1;
+  }
+  
+  .video-description {
+    margin: 4px 0 8px;
+    font-size: 14px;
+    color: #ccc;
+  }
+  
+  .video-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    justify-content: center;
+  }
+  
+  .action-button {
+    padding: 6px 12px;
+    background-color: #333;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+  
+  .action-button:hover {
+    background-color: #444;
+  }
+  
+  /* Instagram Tab */
+  .post-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 16px;
+  }
+  
+  .post-item {
+    position: relative;
+    padding-top: 100%; /* 1:1 Aspect ratio */
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  
+  .post-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    padding: 8px;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  
+  .post-item:hover .post-info {
+    opacity: 1;
+  }
+  
+  .post-stats {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    margin-bottom: 4px;
+  }
+  
+  .post-date {
+    font-size: 10px;
+    color: #aaa;
+  }
+  
+  .story-container {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    padding: 8px 0;
+  }
+  
+  .story-item {
+    flex-shrink: 0;
+    width: 80px;
+    text-align: center;
+  }
+  
+  .story-thumbnail {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 3px solid var(--accent-color);
+    margin-bottom: 8px;
+  }
+  
+  .story-date {
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 2px;
+  }
+  
+  .story-views {
+    font-size: 11px;
+    color: #aaa;
+  }
+  
+  /* TikTok Tab */
+  .tiktok-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+  }
+  
+  .tiktok-item {
+    background-color: #222;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  
+  .tiktok-thumbnail {
+    padding-top: 177%; /* TikTok's aspect ratio */
+    position: relative;
+  }
+  
+  .play-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 48px;
+    height: 48px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: #fff;
+  }
+  
+  .tiktok-info {
+    padding: 12px;
+  }
+  
+  .tiktok-caption {
+    font-weight: 500;
+    margin-bottom: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .tiktok-stats {
+    display: flex;
+    gap: 12px;
+    font-size: 12px;
+    color: #aaa;
+  }
+  
+  .view-count:before {
+    content: "👁 ";
+  }
+  
+  .like-count:before {
+    content: "❤ ";
+  }
+  
+  .comment-count:before {
+    content: "💬 ";
+  }
+  
+  .hashtag-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .hashtag-item {
+    display: flex;
+    justify-content: space-between;
+    background-color: #222;
+    border-radius: 8px;
+    padding: 12px;
+    border: 1px solid #333;
+  }
+  
+  .hashtag-name {
+    font-weight: 500;
+    color: #00f2ea;
+  }
+  
+  .hashtag-views {
+    font-size: 12px;
+    color: #aaa;
+  }

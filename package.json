@@ -1,19 +1,51 @@
 {
-    "name": "youtube-automation",
+    "name": "social-media-uploader",
     "version": "0.1.0",
-    "description": "YouTube Upload Automation Tool",
+    "description": "Plattformübergreifendes Tool zum Hochladen und Planen von Videos für YouTube, Instagram und TikTok",
     "main": "src/main/main.js",
     "scripts": {
-        "start": "electron .",
-        "dev": "electron . --dev"
+      "start": "electron .",
+      "dev": "electron . --dev",
+      "build": "electron-builder",
+      "lint": "eslint ."
     },
     "author": "",
     "license": "MIT",
     "devDependencies": {
-        "electron": "^28.1.0"
+      "electron": "^28.1.0",
+      "electron-builder": "^24.6.4",
+      "eslint": "^8.52.0"
     },
     "dependencies": {
-        "electron-store": "^8.1.0",
-        "googleapis": "^128.0.0"
+      "electron-store": "^8.1.0",
+      "googleapis": "^128.0.0",
+      "uuid": "^9.0.1",
+      "moment": "^2.29.4",
+      "axios": "^1.6.0"
+    },
+    "build": {
+      "appId": "com.yourcompany.socialmediauploader",
+      "productName": "Social Media Uploader",
+      "directories": {
+        "output": "dist"
+      },
+      "files": [
+        "src/**/*",
+        "assets/**/*",
+        "config/**/*",
+        "package.json"
+      ],
+      "win": {
+        "target": "nsis",
+        "icon": "assets/icons/app-icon.ico"
+      },
+      "mac": {
+        "target": "dmg",
+        "icon": "assets/icons/app-icon.icns"
+      },
+      "linux": {
+        "target": "AppImage",
+        "icon": "assets/icons/app-icon.png"
+      }
     }
-}
+  }

@@ -1,0 +1,396 @@
+/* src/renderer/styles/calendar.css */
+.calendar-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .calendar-title h2 {
+    margin: 0;
+    font-weight: 500;
+  }
+  
+  .calendar-nav {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .nav-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 16px;
+    background-color: #2a2a2a;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .nav-btn:hover {
+    background-color: #3a3a3a;
+  }
+  
+  .today-btn {
+    padding: 6px 12px;
+    border-radius: 6px;
+    background-color: #2a2a2a;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .today-btn:hover {
+    background-color: #3a3a3a;
+  }
+  
+  .view-selector {
+    display: flex;
+    background-color: #2a2a2a;
+    border-radius: 6px;
+    padding: 2px;
+  }
+  
+  .view-btn {
+    padding: 6px 12px;
+    border: none;
+    background: none;
+    color: #aaa;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+  
+  .view-btn.active {
+    background-color: #3a3a3a;
+    color: #fff;
+  }
+  
+  .view-btn:hover:not(.active) {
+    color: #fff;
+  }
+  
+  .calendar-views {
+    flex-grow: 1;
+    overflow: auto;
+  }
+  
+  .calendar-view {
+    display: none;
+    height: 100%;
+  }
+  
+  .calendar-view.active {
+    display: block;
+  }
+  
+  .calendar-legend {
+    display: flex;
+    margin-top: 16px;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .legend-item {
+    display: flex;
+    align-items: center;
+  }
+  
+  .legend-color {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+    margin-right: 6px;
+  }
+  
+  /* Platform Colors */
+  .youtube-color {
+    background-color: #FF0000;
+  }
+  
+  .instagram-color {
+    background-color: #C13584;
+  }
+  
+  .tiktok-color {
+    background-color: #00f2ea;
+  }
+  
+  /* Month View */
+  .month-calendar {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .weekday-header {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+  
+  .weekday {
+    padding: 8px;
+    color: #aaa;
+  }
+  
+  .days-container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .week-row {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    flex-grow: 1;
+    border-top: 1px solid #333;
+  }
+  
+  .day {
+    border-right: 1px solid #333;
+    min-height: 100px;
+    padding: 4px;
+    position: relative;
+  }
+  
+  .day:nth-child(7n) {
+    border-right: none;
+  }
+  
+  .day.empty {
+    background-color: #1d1d1d;
+  }
+  
+  .day.today {
+    background-color: rgba(227, 158, 25, 0.1);
+  }
+  
+  .day.selected {
+    outline: 2px solid var(--accent-color);
+    z-index: 1;
+  }
+  
+  .day-header {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 4px;
+  }
+  
+  .day-number {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+  }
+  
+  .today .day-number {
+    background-color: var(--accent-color);
+    color: #fff;
+    font-weight: 500;
+  }
+  
+  .day-content {
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  
+  .calendar-event {
+    padding: 2px 4px;
+    border-radius: 2px;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 11px;
+    color: #fff;
+  }
+  
+  .calendar-event:hover {
+    filter: brightness(110%);
+  }
+  
+  .event-time {
+    margin-right: 4px;
+    font-weight: 500;
+  }
+  
+  /* Week View */
+  .week-calendar {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .week-header {
+    display: flex;
+  }
+  
+  .week-time-label {
+    width: 60px;
+    flex-shrink: 0;
+  }
+  
+  .week-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    flex-grow: 1;
+  }
+  
+  .week-day-header {
+    text-align: center;
+    padding: 8px;
+  }
+  
+  .week-day-header.today {
+    background-color: rgba(227, 158, 25, 0.1);
+  }
+  
+  .week-day-name {
+    color: #aaa;
+    font-size: 12px;
+  }
+  
+  .week-day-number {
+    font-size: 18px;
+    font-weight: 500;
+    margin-top: 4px;
+  }
+  
+  .week-body {
+    flex-grow: 1;
+    overflow-y: auto;
+  }
+  
+  .time-slots {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .time-slot {
+    display: flex;
+    height: 60px;
+    border-top: 1px solid #333;
+  }
+  
+  .time-label {
+    width: 60px;
+    flex-shrink: 0;
+    padding: 4px;
+    color: #aaa;
+    font-size: 12px;
+    text-align: right;
+    padding-right: 8px;
+  }
+  
+  .week-slot-container {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    flex-grow: 1;
+  }
+  
+  .week-slot {
+    border-right: 1px solid #333;
+    position: relative;
+  }
+  
+  .week-slot:last-child {
+    border-right: none;
+  }
+  
+  .week-event {
+    position: absolute;
+    left: 2px;
+    right: 2px;
+    height: 22px;
+    padding: 2px 4px;
+    border-radius: 3px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 11px;
+    color: #fff;
+    cursor: pointer;
+    z-index: 1;
+  }
+  
+  .week-event:hover {
+    filter: brightness(110%);
+  }
+  
+  /* Day View */
+  .day-calendar {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .day-header {
+    text-align: center;
+    padding: 12px;
+    margin-bottom: 16px;
+  }
+  
+  .day-header h3 {
+    margin: 0;
+    font-weight: 500;
+  }
+  
+  .day-body {
+    flex-grow: 1;
+    overflow-y: auto;
+  }
+  
+  .day-slot {
+    flex-grow: 1;
+    position: relative;
+  }
+  
+  .day-event {
+    position: absolute;
+    left: 70px;
+    right: 20px;
+    height: 32px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    color: #fff;
+    cursor: pointer;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .day-event:hover {
+    filter: brightness(110%);
+  }
+  
+  .event-platforms {
+    display: flex;
+    gap: 4px;
+    margin-top: 2px;
+  }
+  
+  .event-platforms .platform-icon {
+    width: 16px;
+    height: 16px;
+    margin-bottom: 0;
+  }

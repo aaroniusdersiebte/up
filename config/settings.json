@@ -1,0 +1,32 @@
+{
+    "appearance": {
+      "accentColor": "#e69e19",
+      "theme": "dark"
+    },
+    "upload": {
+      "defaultPrivacy": "private",
+      "defaultCategory": "22",
+      "maxConcurrentUploads": 2,
+      "showNotifications": true
+    },
+    "scheduler": {
+      "checkInterval": 60000
+    },
+    "platforms": {
+      "youtube": {
+        "enabled": true,
+        "maxVideoSize": 10737418240,
+        "allowedFormats": ["mp4", "mov", "avi", "mkv", "wmv"]
+      },
+      "instagram": {
+        "enabled": true,
+        "maxVideoSize": 3221225472,
+        "allowedFormats": ["mp4", "mov"]
+      },
+      "tiktok": {
+        "enabled": true,
+        "maxVideoSize": 2147483648,
+        "allowedFormats": ["mp4", "mov"]
+      }
+    }
+  }

@@ -1,3 +1,4 @@
+// src/services/youtube/auth.js
 const { BrowserWindow, dialog, net } = require('electron');
 const { google } = require('googleapis');
 const http = require('http');
@@ -44,17 +45,25 @@ class YouTubeAuthService {
   }
 
   setupOAuthClient() {
+    console.log('Konfigurationspfad:', this.configPath);
+    console.log('Konfiguration:', JSON.stringify(this.config, null, 2));
+    
     if (!this.config || !this.config.credentials || !this.config.credentials.youtube) {
-      console.error('Invalid configuration structure');
+      console.error('Ungültige Konfigurationsstruktur');
       return;
     }
-
+  
     const { clientId, clientSecret } = this.config.credentials.youtube;
-
+    console.log('Client ID:', clientId);
+    console.log('Client Secret:', clientSecret ? 'Vorhanden' : 'Fehlt');
+    
     if (!clientId || !clientSecret) {
-      console.error('Missing YouTube API credentials');
+      console.error('YouTube API-Anmeldedaten fehlen');
       return;
     }
+    
+    // Restlicher Code...
+ 
 
     // Erstelle OAuth2 Client mit localhost Redirect
     this.oAuth2Client = new google.auth.OAuth2(
@@ -137,7 +146,7 @@ class YouTubeAuthService {
           'https://www.googleapis.com/auth/youtube',
           'https://www.googleapis.com/auth/youtube.force-ssl'
         ],
-        prompt: 'consent'
+        prompt: 'consent'  // Stelle sicher, dass wir immer einen Refresh Token erhalten
       });
       
       // Öffne URL im Standard-Browser
@@ -196,10 +205,66 @@ class YouTubeAuthService {
   }
 
   isAuthenticated() {
-    return !!(this.oAuth2Client &&
-              this.oAuth2Client.credentials &&
+    return !!(this.oAuth2Client && 
+              this.oAuth2Client.credentials && 
               this.oAuth2Client.credentials.access_token &&
               this.oAuth2Client.credentials.refresh_token);
+  }
+  
+  async getChannelInfo() {
+    if (!this.isAuthenticated()) {
+      throw new Error('Not authenticated with YouTube');
+    }
+    
+    try {
+      // Erstelle YouTube API-Client
+      const youtube = google.youtube({
+        version: 'v3',
+        auth: this.oAuth2Client
+      });
+      
+      // Rufe Kanalinformationen ab
+      const response = await youtube.channels.list({
+        part: 'snippet,statistics',
+        mine: true
+      });
+      
+      if (response.data.items && response.data.items.length > 0) {
+        return response.data.items[0];
+      } else {
+        throw new Error('Keine Kanalinformationen gefunden');
+      }
+    } catch (error) {
+      console.error('Fehler beim Abrufen der Kanalinformationen:', error);
+      throw error;
+    }
+  }
+  
+  async downloadProfileImage(imageUrl, savePath) {
+    return new Promise((resolve, reject) => {
+      const request = net.request(imageUrl);
+      request.on('response', (response) => {
+        const chunks = [];
+        
+        response.on('data', (chunk) => {
+          chunks.push(chunk);
+        });
+        
+        response.on('end', () => {
+          const buffer = Buffer.concat(chunks);
+          fs.writeFile(savePath, buffer, (err) => {
+            if (err) reject(err);
+            else resolve(savePath);
+          });
+        });
+        
+        response.on('error', (error) => {
+          reject(error);
+        });
+      });
+      
+      request.end();
+    });
   }
 }
 
