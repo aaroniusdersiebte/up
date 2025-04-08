@@ -1,8 +1,17 @@
 // src/main/preload.js
 const { contextBridge, ipcRenderer } = require('electron');
 
+// Stelle sicher, dass keine der exponierten APIs bereits existierende Eigenschaften überschreibt
+const API_KEYS = {
+  APP: 'electronApp',
+  PLATFORMS: 'platformApis',
+  FS: 'fileSystem',
+  NOTIFICATIONS: 'notificationSystem',
+  SCHEDULER: 'schedulerSystem'
+};
+
 // App API Zugriff
-contextBridge.exposeInMainWorld('app', {
+contextBridge.exposeInMainWorld(API_KEYS.APP, {
   // Allgemeine App-Funktionen
   getAppInfo: () => ipcRenderer.invoke('app:getInfo'),
   
@@ -15,7 +24,7 @@ contextBridge.exposeInMainWorld('app', {
 });
 
 // Plattform-spezifische APIs
-contextBridge.exposeInMainWorld('platforms', {
+contextBridge.exposeInMainWorld(API_KEYS.PLATFORMS, {
   // YouTube API
   youtube: {
     checkAuth: () => ipcRenderer.invoke('youtube:checkAuth'),
@@ -69,7 +78,7 @@ contextBridge.exposeInMainWorld('platforms', {
 });
 
 // Dateioperationen
-contextBridge.exposeInMainWorld('fs', {
+contextBridge.exposeInMainWorld(API_KEYS.FS, {
   selectFile: (options) => ipcRenderer.invoke('fs:selectFile', options),
   selectDirectory: (options) => ipcRenderer.invoke('fs:selectDirectory', options),
   readFile: (filePath, options) => ipcRenderer.invoke('fs:readFile', filePath, options),
@@ -78,12 +87,12 @@ contextBridge.exposeInMainWorld('fs', {
 });
 
 // Benachrichtigungen
-contextBridge.exposeInMainWorld('notifications', {
+contextBridge.exposeInMainWorld(API_KEYS.NOTIFICATIONS, {
   show: (options) => ipcRenderer.invoke('notifications:show', options)
 });
 
 // Planungs-API
-contextBridge.exposeInMainWorld('scheduler', {
+contextBridge.exposeInMainWorld(API_KEYS.SCHEDULER, {
   getScheduledUploads: () => ipcRenderer.invoke('scheduler:getScheduledUploads'),
   scheduleUpload: (uploadData) => ipcRenderer.invoke('scheduler:scheduleUpload', uploadData),
   updateScheduledUpload: (id, uploadData) => ipcRenderer.invoke('scheduler:updateScheduledUpload', id, uploadData),

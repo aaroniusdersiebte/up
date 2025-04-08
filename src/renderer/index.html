@@ -213,6 +213,7 @@
         </div>
         
 <!-- Settings-Content (versteckt) -->
+<!-- Settings-Content (versteckt) -->
 <div id="settings-content" class="page-content">
   <div class="settings-page">
     <h2>Einstellungen</h2>
@@ -238,6 +239,40 @@
       <div class="form-group">
         <label for="youtube-api-key">API Key</label>
         <input type="text" id="youtube-api-key" class="form-control" placeholder="Google API Key">
+      </div>
+    </div>
+    
+    <div class="form-section" id="auth-status-section">
+      <h3>Authentifizierungs-Status</h3>
+      
+      <!-- YouTube Status -->
+      <div class="platform-auth-status" id="youtube-auth-status">
+        <div class="platform-icon platform-youtube"></div>
+        <div class="status-info">
+          <div class="status-name">YouTube</div>
+          <div class="status-indicator disconnected">Nicht verbunden</div>
+        </div>
+        <button id="youtube-auth-btn" class="secondary-button">Mit YouTube verbinden</button>
+      </div>
+      
+      <!-- Instagram Status -->
+      <div class="platform-auth-status" id="instagram-auth-status">
+        <div class="platform-icon platform-instagram"></div>
+        <div class="status-info">
+          <div class="status-name">Instagram</div>
+          <div class="status-indicator disconnected">Nicht verbunden</div>
+        </div>
+        <button id="instagram-auth-btn" class="secondary-button">Mit Instagram verbinden</button>
+      </div>
+      
+      <!-- TikTok Status -->
+      <div class="platform-auth-status" id="tiktok-auth-status">
+        <div class="platform-icon platform-tiktok"></div>
+        <div class="status-info">
+          <div class="status-name">TikTok</div>
+          <div class="status-indicator disconnected">Nicht verbunden</div>
+        </div>
+        <button id="tiktok-auth-btn" class="secondary-button">Mit TikTok verbinden</button>
       </div>
     </div>
     
@@ -282,22 +317,22 @@
   <script src="components/AuthSection.js"></script>
   <script src="components/SettingsPage.js"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-  // Initialisiere Komponenten
-  const dashboard = new Dashboard('dashboard-content');
-  const calendar = new UploadCalendar('calendar-content');
-  const uploadForm = new MultiPlatformUpload('upload-content');
-  const authSection = new AuthSection('auth-section-container');
-  
-  // Setup Navigation
-  setupNavigation();
-  
-  // Setup Upload-Button
-  setupUploadButton();
-  
-  // Setup Einstellungen
-  setupSettings();
-});
+     document.addEventListener('DOMContentLoaded', () => {
+      // Initialisiere Komponenten
+      const dashboard = new Dashboard('dashboard-content');
+      const calendar = new UploadCalendar('calendar-content');
+      const uploadForm = new MultiPlatformUpload('upload-content');
+      const authSection = new AuthSection('auth-section-container');
+      
+      // Setup Navigation
+      setupNavigation();
+      
+      // Setup Upload-Button
+      setupUploadButton();
+      
+      // Setup Einstellungen
+      setupSettings();
+    });
     
     function setupNavigation() {
       const sidebarItems = document.querySelectorAll('.sidebar-nav-item');
@@ -561,9 +596,17 @@
       
       if (statusElement) {
         const statusIndicator = statusElement.querySelector('.status-indicator');
+        const statusText = statusElement.querySelector('.status-name + .status-indicator');
+        
         if (statusIndicator) {
           statusIndicator.className = `status-indicator ${isAuthenticated ? 'connected' : 'disconnected'}`;
-          statusIndicator.parentElement.querySelector('span').textContent = isAuthenticated ? 'Verbunden' : 'Nicht verbunden';
+          
+          // Check if there's a separate text element, if not, use textContent of the indicator
+          if (statusText) {
+            statusText.textContent = isAuthenticated ? 'Verbunden' : 'Nicht verbunden';
+          } else {
+            statusIndicator.textContent = isAuthenticated ? 'Verbunden' : 'Nicht verbunden';
+          }
         }
       }
       
@@ -579,13 +622,13 @@
       const connectionStatus = document.getElementById('connection-status');
       if (!connectionStatus) return;
       
-      // Sammle den Status aller Plattformen
-      const youtubeStatus = document.querySelector('#youtube-auth-status .status-indicator').classList.contains('connected');
-      const instagramStatus = document.querySelector('#instagram-auth-status .status-indicator').classList.contains('connected');
-      const tiktokStatus = document.querySelector('#tiktok-auth-status .status-indicator').classList.contains('connected');
+      // Safeguard against potential missing elements
+      const youtubeStatus = document.querySelector('#youtube-auth-status .status-indicator');
+      const instagramStatus = document.querySelector('#instagram-auth-status .status-indicator');
+      const tiktokStatus = document.querySelector('#tiktok-auth-status .status-indicator');
       
       // Aktualisiere die Statuszeile
-      connectionStatus.textContent = `YouTube: ${youtubeStatus ? 'Verbunden' : 'Nicht verbunden'} | Instagram: ${instagramStatus ? 'Verbunden' : 'Nicht verbunden'} | TikTok: ${tiktokStatus ? 'Verbunden' : 'Nicht verbunden'}`;
+      connectionStatus.textContent = `YouTube: ${youtubeStatus && youtubeStatus.classList.contains('connected') ? 'Verbunden' : 'Nicht verbunden'} | Instagram: ${instagramStatus && instagramStatus.classList.contains('connected') ? 'Verbunden' : 'Nicht verbunden'} | TikTok: ${tiktokStatus && tiktokStatus.classList.contains('connected') ? 'Verbunden' : 'Nicht verbunden'}`;
     }
     
     function showToast(message) {
